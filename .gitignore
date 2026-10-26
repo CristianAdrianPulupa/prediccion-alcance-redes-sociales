@@ -1,0 +1,23 @@
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment variables and secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# University datasets
+datos/
+prueba_invalida.csv
+
+# Generated model files
+*.joblib
+
+# Generated exports
+*.xlsx

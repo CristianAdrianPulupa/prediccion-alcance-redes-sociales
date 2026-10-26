@@ -1,0 +1,17 @@
+
+[theme]
+base = "dark"
+font = "sans-serif"
+
+# Tamaño general de letras
+baseFontSize = 20
+
+# Grosor de las letras
+baseFontWeight = 400
+
+# Tamaño de los números grandes (RMSE, MAE, R²)
+metricValueFontSize = "3.8rem"
+metricValueFontWeight = 700
+
+# Tamaños de títulos y subtítulos
+headingFontSizes = ["3.2rem", "2.7rem", "2.2rem", "1.8rem", "1.5rem", "1.25rem"]

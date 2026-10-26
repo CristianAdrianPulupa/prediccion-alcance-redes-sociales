@@ -1,0 +1,133 @@
+{
+  "modelo_seleccionado": "Regresión polinómica (grado 4)",
+  "modelo_id": "polinomico",
+  "grado": 4,
+  "metricas": {
+    "rmse_validacion": 941.9757904044718,
+    "mae_validacion": 716.3527476520579,
+    "r2_validacion": 0.07331781362337597,
+    "mae_prueba": 726.8519452843219,
+    "rmse_prueba": 951.2406365265078,
+    "r2_prueba": 0.06426919547276477
+  },
+  "baseline_prueba": {
+    "mae": 727.6313573578432,
+    "rmse": 950.648349347545,
+    "r2": 0.06543409275544909
+  },
+  "comparacion": [
+    {
+      "Modelo": "Regresión lineal",
+      "RMSE de validación": 943.58
+    },
+    {
+      "Modelo": "Variables derivadas",
+      "RMSE de validación": 943.67
+    },
+    {
+      "Modelo": "Regresión polinómica (grado 4)",
+      "RMSE de validación": 941.98
+    },
+    {
+      "Modelo": "Random Forest",
+      "RMSE de validación": 947.1
+    }
+  ],
+  "detalle_modelos": {
+    "baseline": {
+      "nombre": "Regresión lineal",
+      "entrenamiento": {
+        "mae": 716.3823442753591,
+        "rmse": 934.5089854834539,
+        "r2": 0.07190056534840883
+      },
+      "validacion": {
+        "mae": 718.9369662438726,
+        "rmse": 943.5770449623989,
+        "r2": 0.07016462161220394
+      }
+    },
+    "derivadas": {
+      "nombre": "Variables derivadas",
+      "entrenamiento": {
+        "mae": 716.3326084466448,
+        "rmse": 934.4822704151128,
+        "r2": 0.07195362826339258
+      },
+      "validacion": {
+        "mae": 719.0485563113658,
+        "rmse": 943.6681930644764,
+        "r2": 0.06998497157953454
+      }
+    },
+    "polinomico": {
+      "nombre": "Regresión polinómica (grado 4)",
+      "entrenamiento": {
+        "mae": 712.230267778757,
+        "rmse": 930.9944273810432,
+        "r2": 0.07886834359154427
+      },
+      "validacion": {
+        "mae": 716.3527476520579,
+        "rmse": 941.9757904044718,
+        "r2": 0.07331781362337597
+      }
+    },
+    "random_forest": {
+      "nombre": "Random Forest",
+      "entrenamiento": {
+        "mae": 574.0775955765654,
+        "rmse": 754.2622230120442,
+        "r2": 0.39539427036378183
+      },
+      "validacion": {
+        "mae": 721.9987777036406,
+        "rmse": 947.1039041979158,
+        "r2": 0.06320063853872537
+      }
+    }
+  },
+  "polinomios": [
+    {
+      "grado": 1,
+      "rmse_entrenamiento": 934.5089854834539,
+      "rmse_validacion": 943.5770449623989
+    },
+    {
+      "grado": 2,
+      "rmse_entrenamiento": 932.4521011731457,
+      "rmse_validacion": 942.1401095610297
+    },
+    {
+      "grado": 3,
+      "rmse_entrenamiento": 932.1295375260642,
+      "rmse_validacion": 942.6536039692294
+    },
+    {
+      "grado": 4,
+      "rmse_entrenamiento": 930.9944273810432,
+      "rmse_validacion": 941.9757904044718
+    },
+    {
+      "grado": 5,
+      "rmse_entrenamiento": 930.1929200926751,
+      "rmse_validacion": 942.7355100633939
+    },
+    {
+      "grado": 6,
+      "rmse_entrenamiento": 928.4884693939234,
+      "rmse_validacion": 946.3618958254971
+    },
+    {
+      "grado": 7,
+      "rmse_entrenamiento": 927.1250455057273,
+      "rmse_validacion": 950.1606096106341
+    }
+  ],
+  "conjuntos": {
+    "entrenamiento": 9336,
+    "validacion": 2334,
+    "prueba": 2918
+  },
+  "variables_predictoras": 18
+}
