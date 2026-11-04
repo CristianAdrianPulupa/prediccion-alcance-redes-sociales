@@ -8,6 +8,16 @@ import streamlit as st
 
 CARPETA = Path(__file__).resolve().parent
 
+VARIABLES_PREDICTORAS = [
+    "n_tokens_title", "average_token_length", "num_keywords", "kw_avg_max",
+    "global_subjectivity", "global_sentiment_polarity",
+    "global_rate_positive_words", "global_rate_negative_words",
+    "rate_positive_words", "rate_negative_words", "avg_positive_polarity",
+    "avg_negative_polarity", "log_n_tokens_content", "log_num_hrefs",
+    "root2_num_self_hrefs", "log_self_reference_max_shares",
+    "log_self_reference_avg_sharess", "weekday",
+]
+
 
 def numero_espanol(valor: float, decimales=2) -> str:
     """Ej.: 941.98 -> 941,98; 1689 -> 1.689."""
@@ -40,13 +50,53 @@ def main():
         "que una publicación será compartida."
     )
 
+    st.subheader("Resumen de datos y preparación")
+    conjuntos = resultados["conjuntos"]
+    resumen_datos = pd.DataFrame([
+        {
+            "Conjunto": "Entrenamiento",
+            "Registros": conjuntos["entrenamiento"],
+            "Proporción": "64 %",
+        },
+        {
+            "Conjunto": "Validación",
+            "Registros": conjuntos["validacion"],
+            "Proporción": "16 %",
+        },
+        {
+            "Conjunto": "Prueba",
+            "Registros": conjuntos["prueba"],
+            "Proporción": "20 %",
+        },
+    ])
+    st.dataframe(resumen_datos, hide_index=True, width="stretch")
+    st.markdown(
+        "**Variables predictoras (18):** "
+        + ", ".join(VARIABLES_PREDICTORAS)
+        + "."
+    )
+    st.markdown(
+        "**Revisión de datos:** se verificaron los tres conjuntos y sus tipos "
+        "antes del modelado; no se detectaron valores faltantes en las variables "
+        "utilizadas."
+    )
+    st.markdown(
+        "**Preprocesamiento:** las variables numéricas se estandarizaron con "
+        "`StandardScaler` y la variable categórica `weekday` se transformó con "
+        "`OneHotEncoder(handle_unknown=\"ignore\")`."
+    )
+
     # 1. MÉTRICAS Y GRÁFICAS
     st.header("Evaluación del modelo")
     m = resultados["metricas"]
     c1, c2, c3 = st.columns(3)
-    c1.metric("RMSE de validación", numero_espanol(m["rmse_validacion"]))
-    c2.metric("MAE de prueba", numero_espanol(m["mae_prueba"]))
+    c1.metric("MAE de prueba", numero_espanol(m["mae_prueba"]))
+    c2.metric("RMSE de prueba", numero_espanol(m["rmse_prueba"]))
     c3.metric("R² de prueba", numero_espanol(m["r2_prueba"], 4))
+    st.metric(
+        "RMSE de validación (selección del modelo)",
+        numero_espanol(m["rmse_validacion"]),
+    )
 
     st.info(
         f'Modelo seleccionado: {resultados["modelo_seleccionado"]}. '
@@ -135,6 +185,13 @@ def main():
         "amplia y bandas inclinadas vinculadas a los valores discretos de target. "
         "El R² de prueba es bajo, por lo que el modelo tiene capacidad predictiva "
         "limitada. No debemos interpretar las predicciones como valores exactos."
+    )
+    st.markdown(
+        "**Interpretación:** los residuos positivos indican que el modelo "
+        "subestimó los compartidos reales; los negativos indican una "
+        "sobreestimación. Los residuos alejados de cero representan errores "
+        "de mayor magnitud y muestran observaciones cuya predicción se separa "
+        "más del valor observado."
     )
 
 
