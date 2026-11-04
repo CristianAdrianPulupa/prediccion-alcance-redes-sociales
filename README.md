@@ -15,7 +15,7 @@ Este proyecto desarrolla y evalúa modelos de aprendizaje supervisado de regresi
 
 Se comparan diferentes estrategias de modelado predictivo mediante conjuntos independientes de entrenamiento, validación y prueba.
 
-La solución incluye una aplicación web desarrollada con Streamlit que permite visualizar resultados, realizar predicciones y exportar los datos obtenidos.
+La solución incluye una aplicación web desarrollada con Streamlit para presentar los resultados del análisis y la evaluación de los modelos.
 
 **Importante:** La variable objetivo `target` representa el número de veces que una publicación es compartida. No representa el número de personas alcanzadas ni las impresiones de la publicación.
 
@@ -91,7 +91,6 @@ La ventaja observada en validación fue pequeña y no se mantuvo frente a la reg
 - Matplotlib
 - Streamlit
 - Joblib
-- OpenPyXL
 - pytest
 
 ## 7. Estructura del proyecto
@@ -102,8 +101,6 @@ La ventaja observada en validación fue pequeña y no se mantuvo frente a la reg
 | `entrenamiento.py` | Preparación de datos, construcción y comparación de modelos |
 | `evaluacion.py` | Cálculo de métricas y selección |
 | `graficos.py` | Generación de gráficas de entrenamiento y residuos |
-| `validacion.py` | Validación de entradas y archivos CSV |
-| `exportacion.py` | Exportación de resultados a Excel |
 | `app.py` | Interfaz web mediante Streamlit |
 | `requirements.txt` | Dependencias del proyecto |
 | `pruebas/` | Pruebas automatizadas |
@@ -174,25 +171,33 @@ http://localhost:8501
 
 ## 9. Funcionalidades del aplicativo
 
-### Resultados del modelo
+### Resumen de datos
 
-Presenta las métricas de evaluación, la comparación de candidatos, la curva de complejidad polinómica y el análisis de residuos.
+Presenta los tres conjuntos utilizados —entrenamiento, validación y prueba—, sus tamaños y las 18 variables predictoras.
 
-### Predicciones CSV
+### Preprocesamiento
 
-Permite cargar archivos con las características de múltiples publicaciones, generar estimaciones y descargar resultados en CSV o Excel.
+Documenta la revisión de valores faltantes y las transformaciones aplicadas a los datos: `StandardScaler` para las variables numéricas y `OneHotEncoder` para la variable categórica `weekday`.
 
-### Predicción individual
+### Evaluación
 
-Ofrece un formulario para introducir las 18 características predictoras y estimar el número de compartidos de una publicación.
+Muestra las métricas finales del conjunto de prueba: MAE, RMSE y R². También presenta por separado el RMSE de validación utilizado para seleccionar el modelo.
 
-Los valores iniciales del formulario proceden de estadísticas de entrenamiento.
+### Comparación de modelos
+
+Presenta la tabla comparativa de los modelos evaluados y sus RMSE de validación.
+
+### Curva polinómica
+
+Muestra la evolución de los errores de entrenamiento y validación para los grados polinómicos evaluados, permitiendo identificar el grado seleccionado y observar el comportamiento de subajuste y sobreajuste.
+
+### Residuos
+
+Incluye la gráfica de residuos del modelo final y una interpretación de los residuos positivos, negativos y alejados de cero.
 
 ## 10. Validación y pruebas
 
-El aplicativo verifica los campos requeridos, la validez de los tipos numéricos, las categorías de `weekday` y la ausencia de valores inválidos.
-
-Para ejecutar las pruebas automatizadas:
+El proyecto incluye pruebas automatizadas para comprobar componentes del procesamiento y la validación de datos. Para ejecutar las pruebas disponibles:
 
 ```powershell
 python -m pytest pruebas -q -p no:cacheprovider
@@ -204,9 +209,7 @@ Si pytest no se encuentra instalado:
 python -m pip install pytest
 ```
 
-Durante la verificación del proyecto se completaron diez pruebas automatizadas satisfactoriamente.
-
-También se realizaron pruebas manuales de carga de CSV, predicción individual, exportación a Excel y rechazo de entradas no numéricas.
+El comando anterior debe ejecutarse en el entorno virtual del proyecto. Las pruebas existentes deben actualizarse si todavía importan módulos retirados de la versión simplificada; por ello, esta documentación no afirma que la suite completa pase sin errores.
 
 ## 11. Limitaciones
 
