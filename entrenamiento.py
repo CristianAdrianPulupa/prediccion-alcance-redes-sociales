@@ -192,6 +192,7 @@ def ejecutar_entrenamiento():
     mejor_id = elegir_mejor(candidatos)
     elegido = candidatos[mejor_id]
     modelo_final = elegido["modelo"]
+    
     pred_test = modelo_final.predict(x_test)
     metricas_finales = calcular_metricas(y_test, pred_test)
     metricas_baseline_test = calcular_metricas(y_test, base.predict(x_test))
